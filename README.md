@@ -1,4 +1,4 @@
-# octobrain
+# octobrain [![Build Status](https://travis-ci.org/akoenig/octobrain.svg?branch=master)](https://travis-ci.org/akoenig/octobrain)
 
 If you live in the shell most of the time, then it is very annoying to switch to the browser in order to open up a GitHub project page. It is a lot to type, right? `octobrain` is your little friend to help you in this regard. This friendly helper allows you to save aliases for repos and access them via your command line interpreter. Want to test-drive? Cool!
 

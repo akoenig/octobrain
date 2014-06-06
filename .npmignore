@@ -2,3 +2,4 @@ node_modules
 specs
 gulpfile.js
 .travis.yml
+.jshintrc

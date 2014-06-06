@@ -1,2 +1,5 @@
 node_modules
-specs/.tmp
+specs/
+.tmp
+.zedstate
+npm-debug.log
