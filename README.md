@@ -48,7 +48,7 @@ or open up a specific issue (will open the issue #10 of the respective repo)
 
 ## Changelog
 
-See the [HISTORY.md](https://github.com/akoenig/imacss/blob/master/HISTORY.md) for further information.
+See the [HISTORY.md](https://github.com/akoenig/octobrain/blob/master/HISTORY.md) for further information.
 
 ## Author
 
