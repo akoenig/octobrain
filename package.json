@@ -5,7 +5,8 @@
     "name": "André König",
     "email": "andre.koenig@posteo.de"
   },
-  "version": "1.0.0",
+  "bin": "./bin/octobrain",
+  "version": "1.0.1",
   "repository": {
     "url": "git@github.com:akoenig/octobrain.git"
   },
