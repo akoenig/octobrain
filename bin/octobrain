@@ -13,7 +13,7 @@ var db = path.join(Utilities.getUsersHome(), '.' + pkg.name);
 
 function handleError(err) {
     if (err) {
-        console.error(err.toString())
+        console.error('\x1b[31m' + err.toString() + '\x1b[39m');
 
         process.exit(1);
     }
@@ -29,7 +29,9 @@ function store () {
         Store.instantiate(db).put(key, namespace, function onPut (err) {
             handleError(err);
         
-            console.log('Saved!');
+            console.log('\x1b[32mSaved!\x1b[39m');
+
+            process.exit(0);
         });
     });
 }
@@ -42,8 +44,8 @@ function read () {
 
         handleError(err);
 
-        if (!isNaN(argv.i) || !isNaN(argv.issues)) {
-            uri = URI.issues(namespace, (argv.i || argv.issues));
+        if (!isNaN(Number(argv.i)) || !isNaN(Number(argv.issue))) {
+            uri = URI.issues(namespace, (argv.i || argv.issue));
         } else {
             uri = URI.code(namespace);
         }
@@ -52,8 +54,60 @@ function read () {
     });
 }
 
-function usage () {
+function list () {
+    Store.instantiate(db).getAll(function onGetAll (err, data) {
+        var prop;
     
+        handleError(err);
+        
+        for (prop in data) {
+            if (data.hasOwnProperty(prop)) {
+                console.log('%s: %s', prop, data[prop]);
+            }
+        }
+    });
+}
+
+function usage () {
+    var msg = 'usage:\n\n' +
+
+        '\t' + pkg.name + ' alias [namespace] [options]\n\n' +
+        
+        'options: \n\n' +
+            '\t-i, --issue: Open up a specific issue in the browser. \n' +
+            '\t-l, --list: Lists all saved aliases.\n' +
+            '\t-h, --help: Print this usage information.\n' +
+            '\t-v, --version: Version information\n\n' +
+        
+        'usage examples: \n\n' + 
+
+            '\t' + pkg.name + ' [alias] [namespace] \n' +
+                '\t\tWill create an alias of the given GitHub namespace (e.g. "' + pkg.name + ' im akoenig/imacss").\n\n' +
+
+            '\t' + pkg.name + ' [alias] \n' +
+                '\t\tWill open the GitHub project page in your default browser (e.g. "' + pkg.name + ' im").\n\n' +
+
+            '\t' + pkg.name + ' [alias] --issue 10 \n' +
+                '\t\tWill open the issue 10 (e.g. "' + pkg.name + ' im -i 10").\n';
+        
+            
+    console.log(msg);
+
+    process.exit(0);
+}
+
+function other () {
+    if (argv.l || argv.list) {
+        list();
+    } else if (argv.h || argv.help) {
+        usage();
+    } else if (argv.v || argv.version) {
+        console.log(pkg.version);
+
+        process.exit(0);
+    } else {
+        usage();
+    }
 }
 
 switch (argv._.length) {
@@ -66,5 +120,5 @@ switch (argv._.length) {
     break;
     
     default:
-        usage();
+        other();
 }

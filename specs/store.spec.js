@@ -28,7 +28,7 @@ describe('The store module', function () {
     });
     
     afterEach(function (done) {
-        rimraf(tmp, done)
+        rimraf(tmp, done);
     });
     
     it('should be able to put an entry to the store', function (done) {
@@ -53,6 +53,24 @@ describe('The store module', function () {
                 expect(err).toBeNull();
 
                 expect(v).toBe(value);
+                
+                done();
+            });
+        });
+    });
+    
+    it('should be able to return the complete data store object', function (done) {
+        var store = Store.instantiate(file);
+        var key = 'foo';
+        var value = 'bar';
+        
+        store.put(key, value, function (err) {
+            expect(err).toBeNull();
+            
+            store.getAll(function (err, data) {
+                expect(err).toBeNull();
+
+                expect(Object.keys(data).length).toBe(1);
                 
                 done();
             });
