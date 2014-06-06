@@ -44,8 +44,6 @@ function read () {
 
         if (!isNaN(argv.i) || !isNaN(argv.issues)) {
             uri = URI.issues(namespace, (argv.i || argv.issues));
-        } else if (!isNaN(argv.p) || !isNaN(argv.pr)) {
-            uri = URI.pr(namespace, (argv.p || argv.pr));
         } else {
             uri = URI.code(namespace);
         }

@@ -58,30 +58,4 @@ describe('The URIs module', function () {
        
        done();
    });
-
-    it('should return the GitHub PR URI for a given namespace', function (done) {
-         var namespace = 'akoenig/octobrain';
-         var expected = 'https://github.com/akoenig/octobrain/pulls/';
-         
-         expect(uri.pr(namespace)).toBe(expected);
-         
-         done();
-     });
-     
-     it('should return the GitHub R URI for a given namespace and issue ID', function (done) {
-         var namespace = 'akoenig/octobrain';
-         var id = '1';
-         var expected = 'https://github.com/akoenig/octobrain/pulls/1';
-    
-         expect(uri.pr(namespace, id)).toBe(expected);
-         
-         done();
-     });
-     
-    it('should return undefined if no namespace has been defined for a GitHub PR URI', function (done) {
-       
-        expect(uri.pr()).toBeUndefined();
-        
-        done();
-    });
 });
