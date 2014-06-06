@@ -1,0 +1,22 @@
+{
+  "name": "octobrain",
+  "description": "Helps you to avoid typing GitHub URIs over and over again.",
+  "author": {
+    "name": "André König",
+    "email": "andre.koenig@posteo.de"
+  },
+  "version": "1.0.0",
+  "repository": {
+    "url": "git@github.com:akoenig/octobrain.git"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "devDependencies": {
+    "gulp-jasmine": "^0.2.0",
+    "gulp": "^3.7.0",
+    "gulp-jshint": "^1.6.2"
+  }
+}
