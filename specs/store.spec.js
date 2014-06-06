@@ -32,7 +32,7 @@ describe('The store module', function () {
     });
     
     it('should be able to put an entry to the store', function (done) {
-        var store = Store.create(file);
+        var store = Store.instantiate(file);
         
         store.put('foo', 'bar', function (err) {
             expect(err).toBeNull();
@@ -42,7 +42,7 @@ describe('The store module', function () {
     });
     
     it('should be able to get an entry from the store', function (done) {
-        var store = Store.create(file);
+        var store = Store.instantiate(file);
         var key = 'foo';
         var value = 'bar';
 

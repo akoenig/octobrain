@@ -19,5 +19,9 @@
     "gulp-jasmine": "^0.2.0",
     "gulp-jshint": "^1.6.2",
     "rimraf": "^2.2.8"
+  },
+  "dependencies": {
+    "minimist": "^0.1.0",
+    "openurl": "^1.1.0"
   }
 }

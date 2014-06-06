@@ -1,0 +1,72 @@
+#!/usr/bin/env node
+
+var path = require('path');
+var browser = require('openurl');
+var argv = require('minimist')(process.argv.slice(2));
+var pkg = require('../package.json');
+
+var URI = require('../lib').URI;
+var Store = require('../lib').Store;
+var Utilities = require('../lib').Utilities;
+
+var db = path.join(Utilities.getUsersHome(), '.' + pkg.name);
+
+function handleError(err) {
+    if (err) {
+        console.error(err.toString())
+
+        process.exit(1);
+    }
+}
+
+function store () {
+    var key = argv._[0];
+    var namespace = argv._[1];
+
+    URI.exists(namespace, function onExists (err) {
+        handleError(err);
+
+        Store.instantiate(db).put(key, namespace, function onPut (err) {
+            handleError(err);
+        
+            console.log('Saved!');
+        });
+    });
+}
+
+function read () {
+    var key = argv._[0];
+
+    Store.instantiate(db).get(key, function onGet (err, namespace) {
+        var uri;
+
+        handleError(err);
+
+        if (!isNaN(argv.i) || !isNaN(argv.issues)) {
+            uri = URI.issues(namespace, (argv.i || argv.issues));
+        } else if (!isNaN(argv.p) || !isNaN(argv.pr)) {
+            uri = URI.pr(namespace, (argv.p || argv.pr));
+        } else {
+            uri = URI.code(namespace);
+        }
+
+        browser.open(uri);
+    });
+}
+
+function usage () {
+    
+}
+
+switch (argv._.length) {
+    case 2:
+        store();
+    break;
+        
+    case 1:
+        read();
+    break;
+    
+    default:
+        usage();
+}
